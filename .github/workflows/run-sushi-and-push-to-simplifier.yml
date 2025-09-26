@@ -35,18 +35,18 @@ jobs:
         working-directory: ExampleIG
         run: sushi .
 
-      - name: Remove Unwanted File(s)
-        # SUSHI can generate extra artifacts (like project.yaml) that Simplifier doesn’t need. We delete them here so
-        # that only real FHIR resources are pushed to Simplifier.
-        run: |
-          rm -f ExampleIG/fsh-generated/resources/project.yaml
-
       - name: Login to Simplifier
         run: fhir login email=${{ secrets.SIMPLIFIER_EMAIL_ADDRESS }} password=${{ secrets.SIMPLIFIER_PASSWORD }}
 
       - name: Link Simplifier Project
         working-directory: ExampleIG/fsh-generated/resources
         run: fhir project link ${{ secrets.SIMPLIFIER_PROJECT_KEY }} --strategy TakeLocal
+
+      - name: Remove Unwanted File(s)
+        # SUSHI can generate extra artifacts (like project.yaml) that Simplifier doesn’t need. We delete them here so
+        # that only real FHIR resources are pushed to Simplifier.
+        run: |
+          rm -f ExampleIG/fsh-generated/resources/project.yaml
 
       - name: Push to Simplifier
         working-directory: ExampleIG/fsh-generated/resources
