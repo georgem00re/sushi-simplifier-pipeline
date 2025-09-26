@@ -1,0 +1,22 @@
+name: run-sushi-and-push-to-simplifier
+on:
+  workflow_call:
+jobs:
+  run-sushi-and-push-to-simplifier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Set up Node.js for SUSHI
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install SUSHI
+        run: npm install -g fsh-sushi
