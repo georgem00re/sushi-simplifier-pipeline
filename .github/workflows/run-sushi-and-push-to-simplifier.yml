@@ -39,11 +39,11 @@ jobs:
         run: fhir login email=${{ secrets.SIMPLIFIER_EMAIL_ADDRESS }} password=${{ secrets.SIMPLIFIER_PASSWORD }}
 
       - name: Link Simplifier Project
-        working-directory: ExampleIG
+        working-directory: ExampleIG/fsh-generated/resources
         run: fhir project link ${{ secrets.SIMPLIFIER_PROJECT_KEY }} --strategy TakeLocal
 
       - name: Push to Simplifier
-        working-directory: ExampleIG
+        working-directory: ExampleIG/fsh-generated/resources
         run: fhir project push
 
       - name: Persist Artifacts
