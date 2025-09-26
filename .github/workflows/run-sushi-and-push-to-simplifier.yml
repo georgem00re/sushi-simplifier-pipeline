@@ -1,6 +1,11 @@
 name: run-sushi-and-push-to-simplifier
 on:
   workflow_call:
+    secrets:
+      SIMPLIFIER_EMAIL_ADDRESS:
+        required: true
+      SIMPLIFIER_PASSWORD:
+        required: true
 jobs:
   run-sushi-and-push-to-simplifier:
     runs-on: ubuntu-latest
@@ -23,3 +28,6 @@ jobs:
 
       - name: Install SUSHI
         run: npm install -g fsh-sushi
+
+      - name: Login to Simplifier
+        run: fhir login email=${{ secrets.SIMPLIFIER_EMAIL_ADDRESS }} password=${{ secrets.SIMPLIFIER_PASSWORD }}
