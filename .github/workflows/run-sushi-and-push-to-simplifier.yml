@@ -32,6 +32,7 @@ jobs:
         run: npm install -g fsh-sushi
 
       - name: Generate resources with SUSHI
+        working-directory: ExampleIG
         run: sushi . -o ./fsh-generated
 
       - name: Login to Simplifier
