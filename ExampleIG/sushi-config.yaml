@@ -1,5 +1,5 @@
-id: fhir.example
-canonical: http://example.org
+id: example-ig
+canonical: http://example.org/ImplementationGuide/example-ig
 name: ExampleIG
 status: draft
 fhirVersion: 4.0.1
