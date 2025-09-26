@@ -6,6 +6,8 @@ on:
         required: true
       SIMPLIFIER_PASSWORD:
         required: true
+      SIMPLIFIER_PROJECT_KEY:
+        required: true
 jobs:
   run-sushi-and-push-to-simplifier:
     runs-on: ubuntu-latest
@@ -31,3 +33,6 @@ jobs:
 
       - name: Login to Simplifier
         run: fhir login email=${{ secrets.SIMPLIFIER_EMAIL_ADDRESS }} password=${{ secrets.SIMPLIFIER_PASSWORD }}
+
+      - name: Link Simplifier Project
+        run: fhir project link ${{ secrets.SIMPLIFIER_PROJECT_KEY }} --strategy TakeLocal
