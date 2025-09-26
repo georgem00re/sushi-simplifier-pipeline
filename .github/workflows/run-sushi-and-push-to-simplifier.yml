@@ -33,7 +33,7 @@ jobs:
 
       - name: Generate resources with SUSHI
         working-directory: ExampleIG
-        run: sushi . -o ./fsh-generated
+        run: sushi .
 
       - name: Login to Simplifier
         run: fhir login email=${{ secrets.SIMPLIFIER_EMAIL_ADDRESS }} password=${{ secrets.SIMPLIFIER_PASSWORD }}
