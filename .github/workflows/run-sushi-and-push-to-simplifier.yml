@@ -12,7 +12,7 @@ jobs:
   run-sushi-and-push-to-simplifier:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
@@ -31,9 +31,15 @@ jobs:
       - name: Install SUSHI
         run: npm install -g fsh-sushi
 
-      - name: Generate resources with SUSHI
+      - name: Generate Resources with SUSHI
         working-directory: ExampleIG
         run: sushi .
+
+      - name: Remove Unwanted File(s)
+        # SUSHI can generate extra artifacts (like project.yaml) that Simplifier doesn’t need. We delete them here so
+        # that only real FHIR resources are pushed to Simplifier.
+        run: |
+          rm -f ExampleIG/fsh-generated/resources/project.yaml
 
       - name: Login to Simplifier
         run: fhir login email=${{ secrets.SIMPLIFIER_EMAIL_ADDRESS }} password=${{ secrets.SIMPLIFIER_PASSWORD }}
